@@ -1,0 +1,130 @@
+<!Doctype html>
+<html lang="en">
+<head>
+	<title>Mobile App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+  </script>
+<style> 
+  .container{overflow: hidden}
+  .header{
+    background-color: #f7901e;
+    height: 36px;
+    width: 100%;
+    min-width: 300px;
+    position: relative;
+  }
+  .tab{float: left;}
+  .tab-2{margin-left: 50px}
+  .tab-2 input{display: block;margin-bottom: 10px}
+  tr{transition: all .25a ease-in-out}
+  tr:hover{background-color: #fff;cursor: pointer}
+ </style>
+</head>
+
+<body>
+   <div  id="root">
+     <div class="main-container">
+      <div class="component container">
+        <div class="header">phone Directory</div>
+      </div>
+   </div>
+  </div>
+    
+        <div class="container">
+          <div class="tab tab-1">
+          <table id="table" border="1">
+            <tr>
+            <br> <th>Name</th></br>
+            <br> <th>Phone Number</th></br>
+           </tr>
+           <tr>
+              <td>Sohana gupta</td>
+              <td>3456789</td>
+            </tr>
+            <tr>
+              <td>Annesha Gupta</td>
+              <td>1234567</td>
+            </tr>    
+            <tr>
+               <td>Swetta singh</td>
+               <td>5678910</td>
+            </tr>   
+        </table><br/>
+      </div><br/>
+      <div class="tab tab-2"><br/>
+         name:<input type="text" name="name" id="name"><br/>
+         Phone:<input type="integer" name="phone" id="phone"><br/>
+         <button  onclick="addHtmlTableRow();">Add</button>
+         <button  onclick="deleteSelectedRow();">Delete</button>
+
+       </table>
+     </div>
+   </div>
+  <script>
+    var rIndex,
+        table = document.getElementById("table");
+
+     function checkEmptyInput()
+     {
+        var isEmpty=false,
+        name=document.getElementById("name").value,
+        phone=document.getElementById("phone").value;
+
+      if(name=== " "){
+         alert("name cannot be empty");
+         isEmpty= true;
+      }
+      else if(phone=== " "){
+         alert("phone cannot be empty");
+         isEmpty=true;
+      }
+      return isEmpty;
+  }    
+
+    function addHtmlTableRow()
+    {
+     
+       if(!checkEmptyInput()){
+      var  newRow=table.insertRow(table.length),
+        cell1=newRow.insertCell(0),
+        cell2=newRow.insertcell(1),
+        name=document.getElementById("name").value,
+        phone=document.getElementById("phone").value;
+
+
+    cell1.innerHTML=name;
+    cell2.innerHTML=phone;
+    selectedRowToInput();
+    }
+  }
+   
+   function selectedRowToInput()
+   {
+        
+        for(var i=1;i<table.rows.length;i++)
+         {  
+             table.rows[i].onclick= function()
+             {
+               rIndex=this.rowIndex;
+               document.getElementById("name").value=this.cells(0).innerHTML;
+               document.getElementById("phone").value=this.cells(1).innerHTML;
+             };
+          }
+   }
+   selectedRowToInput();
+
+   function deleteSelectedRow()
+   {
+       document.getElementById("mytable").deleteRow(0);
+       document.getElementById("mytable").deleteRow(1);
+      document.getElementById("mytable").deleteRow(2);
+
+   }
+   
+
+    
+  </script>
+  </body>
+  </html>
